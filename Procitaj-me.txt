@@ -19,6 +19,11 @@ Ako neki video odjednom nece da se skine, izaberi
 opciju 4 (azuriraj) pa pokusaj ponovo. YouTube
 cesto menja pravila, pa se program mora osvezavati.
 
+Video sa ogranicenjem godina ("Sign in to confirm your age"):
+program sam proba ponovo sa tvojom YouTube prijavom iz
+browsera. Najbolje radi Firefox - budi ulogovan na YouTube
+u Firefox-u (nalog mora biti punoletan).
+
 Google Drive:
 Ako imas aplikaciju "Google Drive za racunar",
 program ce je sam pronaci i ponuditi slanje kopija.

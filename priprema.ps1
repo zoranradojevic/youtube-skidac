@@ -21,4 +21,12 @@ if (-not (Test-Path "$dir\ffmpeg.exe")) {
   Remove-Item "$dir\ff" -Recurse -Force
 }
 
+if (-not (Test-Path "$dir\deno.exe")) {
+  Write-Host "Skidam deno (treba za YouTube proveru)..."
+  $zip = "$dir\deno.zip"
+  Invoke-WebRequest "https://github.com/denoland/deno/releases/latest/download/deno-x86_64-pc-windows-msvc.zip" -OutFile $zip
+  Expand-Archive $zip $dir -Force
+  Remove-Item $zip -Force
+}
+
 Write-Host "Spremno."

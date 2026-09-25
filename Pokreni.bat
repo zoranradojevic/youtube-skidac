@@ -10,13 +10,14 @@ if not exist "%RADNI%" mkdir "%RADNI%"
 
 if not exist "%YTDLP%" goto priprema
 if not exist "%~dp0ffmpeg.exe" goto priprema
+if not exist "%~dp0deno.exe" goto priprema
 goto posle
 
 :priprema
 echo.
 echo ==================================================
 echo   PRVO POKRETANJE
-echo   Skidam potrebne programe (oko 100 MB).
+echo   Skidam potrebne programe (oko 150 MB).
 echo   Traje par minuta, i radi se samo jednom.
 echo ==================================================
 echo.
@@ -75,21 +76,35 @@ echo Skidam, sacekaj...
 echo.
 
 if "!IZBOR!"=="1" (
-  "%YTDLP%" -x --audio-format mp3 --audio-quality 0 --no-playlist -P "home:%RADNI%" -o "%%(title)s.%%(ext)s" "!LINK!"
   set "TIP=*.mp3"
   set "PODFOLDER=Muzika"
 ) else (
-  "%YTDLP%" -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/b" --merge-output-format mp4 --no-playlist -P "home:%RADNI%" -o "%%(title)s.%%(ext)s" "!LINK!"
   set "TIP=*.mp4"
   set "PODFOLDER=Video"
 )
 
-if errorlevel 1 (
+call :skini
+if not errorlevel 1 goto uspelo
+
+rem Nije proslo bez prijave (npr. video sa ogranicenjem godina).
+rem Probaj ponovo sa YouTube prijavom iz nekog od browsera.
+for %%B in (firefox edge chrome brave) do (
   echo.
-  echo NIJE USPELO.
-  echo Ako se ovo ponavlja, izaberi opciju 4 pa pokusaj opet.
-  goto pocetak
+  echo Probam ponovo sa prijavom iz browsera: %%B ...
+  echo.
+  del /q "%RADNI%\*.*" >nul 2>&1
+  call :skini --cookies-from-browser %%B
+  if not errorlevel 1 goto uspelo
 )
+
+echo.
+echo NIJE USPELO.
+echo Ako se ovo ponavlja, izaberi opciju 4 pa pokusaj opet.
+echo Ako je video sa ogranicenjem godina: uloguj se na YouTube
+echo u Firefox-u (nalog mora biti punoletan) i probaj opet.
+goto pocetak
+
+:uspelo
 
 set "CILJ=!FOLDER!\!PODFOLDER!"
 if not exist "!CILJ!" mkdir "!CILJ!"
@@ -164,4 +179,14 @@ goto :eof
 
 :kraj
 del /q "%RADNI%\*.*" >nul 2>&1
+exit /b
+
+:skini
+rem %* = dodatni parametri (npr. --cookies-from-browser firefox)
+if "!IZBOR!"=="1" (
+  "%YTDLP%" %* -x --audio-format mp3 --audio-quality 0 --no-playlist -P "home:%RADNI%" -o "%%(title)s.%%(ext)s" "!LINK!"
+) else (
+  "%YTDLP%" %* -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/b" --merge-output-format mp4 --no-playlist -P "home:%RADNI%" -o "%%(title)s.%%(ext)s" "!LINK!"
+)
+exit /b !errorlevel!
 
