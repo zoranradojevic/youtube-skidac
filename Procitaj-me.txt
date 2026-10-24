@@ -15,6 +15,10 @@ YOUTUBE SKIDAC - kratko uputstvo
 5. Biras folder u koji se snima.
    Kasnije mozes da ga promenis opcijom 3.
 
+6. Za video (opcija 2) program pita koji kvalitet hoces
+   (1080p, 720p...) i pokaze otprilike koliko ce fajl
+   biti velik. Samo Enter = najbolji kvalitet.
+
 Ako neki video odjednom nece da se skine, izaberi
 opciju 4 (azuriraj) pa pokusaj ponovo. YouTube
 cesto menja pravila, pa se program mora osvezavati.

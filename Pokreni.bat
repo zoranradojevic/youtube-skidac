@@ -95,6 +95,14 @@ if /i not "!LINK:sporteurope.tv=!"=="!LINK!" (
   goto uspelo
 )
 
+rem za video pitaj koji kvalitet (10000 = najbolji)
+set "VISINA=10000"
+if "!IZBOR!"=="2" (
+  powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0kvalitet.ps1" -Link "!LINK!" -YtDlp "%YTDLP%" -Izlaz "%RADNI%\visina.txt"
+  if exist "%RADNI%\visina.txt" set /p VISINA=<"%RADNI%\visina.txt"
+  echo.
+)
+
 call :skini
 if not errorlevel 1 goto uspelo
 
@@ -198,7 +206,7 @@ rem %* = dodatni parametri (npr. --cookies-from-browser firefox)
 if "!IZBOR!"=="1" (
   "%YTDLP%" %* -x --audio-format mp3 --audio-quality 0 --no-playlist -P "home:%RADNI%" -o "%%(title)s.%%(ext)s" "!LINK!"
 ) else (
-  "%YTDLP%" %* -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/b" --merge-output-format mp4 --no-playlist -P "home:%RADNI%" -o "%%(title)s.%%(ext)s" "!LINK!"
+  "%YTDLP%" %* -f "bv*[height<=!VISINA!][ext=mp4]+ba[ext=m4a]/b[height<=!VISINA!][ext=mp4]/bv*[height<=!VISINA!]+ba/b[height<=!VISINA!]/b" --merge-output-format mp4 --no-playlist -P "home:%RADNI%" -o "%%(title)s.%%(ext)s" "!LINK!"
 )
 exit /b !errorlevel!
 

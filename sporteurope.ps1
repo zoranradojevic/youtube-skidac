@@ -36,17 +36,23 @@ $naslov = ($meta.name -replace '[\\/:*?"<>|]', "-").Trim() -replace "%", "%%"
 Write-Host "Naslov: $($meta.name)"
 if ($delovi.Count -gt 1) { Write-Host "Snimak ima $($delovi.Count) dela." }
 
+$zaglavlja = @("--referer", "https://webplayer.sporteurope.tv/", "--add-headers", "Origin:https://webplayer.sporteurope.tv")
+$visina = 10000
+if ($Izbor -ne "1") {
+  $visina = & "$PSScriptRoot\kvalitet.ps1" -Link $delovi[0] -YtDlp $YtDlp -Dodatno $zaglavlja
+}
+
 $i = 0
 foreach ($hls in $delovi) {
   $i++
   $ime = $naslov
   if ($delovi.Count -gt 1) { $ime = "$naslov - Deo $i" }
-  $parametri = @("--referer", "https://webplayer.sporteurope.tv/", "--add-headers", "Origin:https://webplayer.sporteurope.tv", "-P", "home:$Radni", "-o", "$ime.%(ext)s")
+  $parametri = $zaglavlja + @("-P", "home:$Radni", "-o", "$ime.%(ext)s")
   if ($Izbor -eq "1") {
     # zvuk je isti u svim kvalitetima, pa uzmi najmanji video
     $parametri += @("-f", "wa/w", "-x", "--audio-format", "mp3", "--audio-quality", "0")
   } else {
-    $parametri += @("-f", "bv*+ba/b", "--merge-output-format", "mp4")
+    $parametri += @("-f", "bv*[height<=$visina]+ba/b[height<=$visina]/bv*+ba/b", "--merge-output-format", "mp4")
   }
   & $YtDlp @parametri $hls
   if ($LASTEXITCODE -ne 0) { exit 1 }
