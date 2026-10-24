@@ -24,6 +24,10 @@ program sam proba ponovo sa tvojom YouTube prijavom iz
 browsera. Najbolje radi Firefox - budi ulogovan na YouTube
 u Firefox-u (nalog mora biti punoletan).
 
+Sporteurope.tv:
+Radi i sa linkovima sa sporteurope.tv (besplatni snimci,
+ne PREMIUM). Utakmica u punom kvalitetu ima oko 3 GB.
+
 Google Drive:
 Ako imas aplikaciju "Google Drive za racunar",
 program ce je sam pronaci i ponuditi slanje kopija.

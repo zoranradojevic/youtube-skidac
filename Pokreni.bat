@@ -83,6 +83,18 @@ if "!IZBOR!"=="1" (
   set "PODFOLDER=Video"
 )
 
+rem sporteurope.tv ima svoj pomocni program
+if /i not "!LINK:sporteurope.tv=!"=="!LINK!" (
+  powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0sporteurope.ps1" -Link "!LINK!" -Radni "%RADNI%" -Izbor "!IZBOR!" -YtDlp "%YTDLP%"
+  if errorlevel 1 (
+    echo.
+    echo NIJE USPELO.
+    echo Ako se ovo ponavlja, izaberi opciju 4 pa pokusaj opet.
+    goto pocetak
+  )
+  goto uspelo
+)
+
 call :skini
 if not errorlevel 1 goto uspelo
 
