@@ -1,23 +1,29 @@
 YOUTUBE SKIDAC - kratko uputstvo
 
-1. Raspakuj CEO folder na jedno mesto (npr. Desktop).
-   Ne pokretaj direktno iz ZIP-a.
+INSTALACIJA (dva klika):
+1. Skini fajl Instaliraj-YouTube-Skidac.bat:
+   https://github.com/zoranradojevic/youtube-skidac/releases/latest/download/Instaliraj-YouTube-Skidac.bat
+   Ako browser pita da li da zadrzi fajl, izaberi "Zadrzi" (Keep).
 
-2. Dupli klik na Pokreni.bat
-
-3. Ako Windows prikaze plavi prozor
-   "Windows protected your PC":
+2. Dupli klik na skinuti fajl.
+   Ako Windows prikaze plavi prozor "Windows protected your PC":
    klikni "More info", pa "Run anyway".
+   Ako pita "Do you want to run this file?", klikni "Run".
 
-4. Prvo pokretanje traje par minuta jer program
-   skida ono sto mu treba. Posle je odmah spreman.
+Instalacija traje par minuta jer skida sve sto treba (oko 150 MB).
+Na kraju napravi precicu "YouTube Skidac" na Desktop-u i u
+Start meniju, i odmah pokrene program.
+Za novu verziju programa samo ponovo pokreni instalaciju -
+podesavanja ostaju.
 
-5. Biras folder u koji se snima.
-   Kasnije mozes da ga promenis opcijom 3.
-
-6. Za video (opcija 2) program pita koji kvalitet hoces
-   (1080p, 720p...) i pokaze otprilike koliko ce fajl
-   biti velik. Samo Enter = najbolji kvalitet.
+KORISCENJE:
+- Pokreni "YouTube Skidac" (Desktop ili Start meni).
+- Prvi put biras folder u koji se snima.
+  Kasnije mozes da ga promenis opcijom 3.
+- Izaberi 1 (MP3) ili 2 (MP4) i nalepi link.
+- Za video (opcija 2) program pita koji kvalitet hoces
+  (1080p, 720p...) i pokaze otprilike koliko ce fajl
+  biti velik. Samo Enter = najbolji kvalitet.
 
 Ako neki video odjednom nece da se skine, izaberi
 opciju 4 (azuriraj) pa pokusaj ponovo. YouTube
@@ -36,3 +42,8 @@ Google Drive:
 Ako imas aplikaciju "Google Drive za racunar",
 program ce je sam pronaci i ponuditi slanje kopija.
 Ako je nemas, sve radi normalno - samo bez te opcije.
+
+Brisanje programa:
+Obrisi folder %LOCALAPPDATA%\YouTube-Skidac (nalepi to u
+adresnu traku File Explorer-a) i precice "YouTube Skidac".
+Skinuti fajlovi ostaju u folderu koji si izabrao.
